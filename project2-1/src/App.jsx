@@ -1,34 +1,88 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useReducer, useRef} from 'react'
 import './App.css'
+import Header from './component/Header'
+import TodoEditor from './component/TodoEditor'
+import TodoList from './component/TodoList'
+
+const mockTodo = [
+  {
+    id: 0,
+    isDone: false,
+    content: "React 공부하기",
+    createDate: new Date().getTime(),
+  },
+  {
+    id: 1,
+    isDone: false,
+    content: "빨래 널기",
+    createDate: new Date().getTime(),
+  },
+  {
+    id: 2,
+    isDone: false,
+    content: "노래 연습하기",
+    createDate: new Date().getTime(),
+  },
+]
+
+function reducer(state, action){
+
+  switch(action.type){
+    case "CREATE":
+      return [action.newItem, ...state];
+    case "UPDATE":
+      return state.map( (it) => it.id === action.id ? {...it, isDone: !it.isDone}: it )
+    case "DELETE":
+      return state.filter(it => it.id !== action.id)
+    default:
+      return state;
+  }
+}
 
 function App() {
-  const [count, setCount] = useState(0)
+  
+  const [todo, dispatch] = useReducer(reducer, mockTodo)
+  const idRef = useRef(3);
+  
+  /* 데이타 추가 하기*/
+  const onCreate = (content) => {
+    dispatch({
+      type: "CREATE",
+      newItem: {
+        id: idRef.current,
+        content: content,
+        isDone: false,
+        createDate: new Date().getTime()
+      }
+    })
+    idRef.current += 1;
+  };
 
+  /* 데이타 수정 하기*/
+  const OnUpdate = (targetId) => {
+    dispatch({
+      type: "UPDATE",
+      id: targetId
+    });
+  };
+
+  /* 데이타 삭제 하기*/
+  const onDelete = (targetId) =>{
+    dispatch({
+      type: "DELETE",
+      id: targetId
+    });
+  };
+  
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <div className="App">
+
+      {/* <TestComp /> */}
+
+      <Header />
+      <TodoEditor  onCreate = {onCreate}  />
+      <TodoList todo = {todo} OnUpdate = {OnUpdate}  onDelete={onDelete}/>
+    </div>
   )
 }
 
