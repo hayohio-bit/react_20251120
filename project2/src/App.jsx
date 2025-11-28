@@ -5,6 +5,7 @@ import TodoEditor from './component/TodoEditor';
 import TodoList from './component/TodoList';
 import TodoItem from './component/TodoItem';
 import { useState } from 'react';
+import TestComp from './component/TestComp';
 
 const mockTodo = [
   {
@@ -69,6 +70,9 @@ function App() {
 
   return (
     <div className="App">
+
+      <TestComp />
+
       <Header />
       <TodoEditor onCreate={onCreate} />
       <TodoList todo={todo} onUpdate={onUpdate} onDelete={onDelete} />
