@@ -1,5 +1,4 @@
 import './App.css';
-import { getEmotionImgById } from './util';
 import { Route, Routes, Link } from 'react-router-dom';
 import Home from './page/Home';
 import New from './page/New';
@@ -11,7 +10,7 @@ import Edit from './page/Edit';
 function App() {
   return (
     <div className="App">
-      <Routes>
+        <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/new" element={<New />} />
         <Route path="/diary/:id" element={<Diary />} />
