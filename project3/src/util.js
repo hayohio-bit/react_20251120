@@ -49,5 +49,19 @@ export const emotionList = [
         name: "좋음",
         img: getEmotionImgById(2),
     },
-    
-]
+    {
+        id: 3,
+        name: "쏘쏘",
+        img: getEmotionImgById(3),
+    },
+    {
+        id: 4,
+        name: "나쁨",
+        img: getEmotionImgById(4),
+    },
+    {
+        id: 5,
+        name: "끔찍쓰",
+        img: getEmotionImgById(5),
+    },
+];
