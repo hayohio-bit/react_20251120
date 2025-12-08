@@ -6,9 +6,11 @@
     padding-bottom: 10px;
     padding-left: 20px;
     padding-right: 20px;
-    font-size: 18px;
     white-space: nowrap;
-    font-family: "Nanum Pen Script";
+    font-size: 15px;
+    font-family: "Poor Story", sans-serif;
+    font-weight: 600;
+    font-style: normal;
 }
 
 .Button_default {

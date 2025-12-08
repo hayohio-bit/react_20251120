@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import "./Editor.css";
 import { emotionList, getFormattedDate } from '../util';
 import Button from './Button';
@@ -43,6 +43,16 @@ const Editor = ({ initData, onSubmit }) => {
             emotionId,
         });
     };
+
+    useEffect(() => {
+        if (initData) {
+            setState({
+                ...initData,
+                date: getFormattedDate(new Date(parseInt(initData.date))),
+            });
+        }
+    }, [initData]);
+
 
     return (
         <div className="Editor">

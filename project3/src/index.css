@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&family=Yeon+Sung&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Gamja+Flower&family=Gugi&family=Jua&family=Nanum+Brush+Script&family=Nanum+Pen+Script&family=Orbit&family=Poor+Story&family=Yeon+Sung&display=swap');
 
 html,
 body {
@@ -7,8 +7,11 @@ body {
   background-color: #f6f6f6;
   display: flex;
   justify-content: center;
-  font-family: "Nanum Pen Script";
+  font-family: "Poor Story", sans-serif;
+  font-weight: 500;
+  font-style: normal;
 }
+
 
 body {
   height: 100%;

@@ -16,8 +16,10 @@
     border-radius: 5px;
     background-color: #ececec;
     padding: 20px;
-    font-size: 20px;
-    font-family: "Nanum Pen Script";
+    font-size: 17px;
+    font-family: "Poor Story", system-ui;
+    font-style: normal;
+    font-weight: 600;
     }
 
     .Editor input {
@@ -31,6 +33,9 @@
     min-height: 200px;
     box-sizing: border-box;
     resize: vertical;
+    font-family: "Poor Story", sans-serif;
+    font-weight: 600;
+    font-size: 18px;
     }
 
     .Editor .bottom_section {

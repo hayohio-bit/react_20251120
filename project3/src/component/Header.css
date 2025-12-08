@@ -11,9 +11,9 @@
     }
 
     .Header button {
-    font-family: "Nanum Pen Script";
+    font-family: "Nanum Brush Script", sans-serif;
     }
-
+        
     .Header .header_title {
     width: 50%;
     font-size: 25px;
