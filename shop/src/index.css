@@ -19,3 +19,6 @@ code {
   background-position: center;
   margin-bottom: 30px;
 }
+
+.c1 {text-decoration: none; color:#000; text-align: center;}
+.c1:hover {color: green;}
