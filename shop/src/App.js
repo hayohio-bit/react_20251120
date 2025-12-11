@@ -18,6 +18,7 @@ import data from "./db/fruit";
 import Cart from "./components/Cart";
 import axios from "axios";
 import Board from "./components/Board";
+import Footer from './components/Footer';
 
 function App() {
   const [input, setInput] = useState("");
@@ -279,6 +280,7 @@ function App() {
         {/* 404 페이지 */}
         <Route path="*" element={<NotFound />} />
       </Routes>
+      <Footer />
     </div>
   );
 }

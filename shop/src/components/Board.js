@@ -133,95 +133,84 @@
     return (
         <div className="container board-wrap">
         <div className="board-header">
-        <h3 className="board-title">과일농장 게시판</h3>
-        <span className="board-subtitle">배송, 품질, 환불 등 무엇이든 문의해주세요.</span>
-        </div>
+            <h3 className="board-title">과일농장 게시판</h3>
+            <span className="board-subtitle">
+            배송, 품질, 환불 등 무엇이든 편하게 문의해 주세요.
+            </span>
+        </div>   
 
         {/* 목록 보기 */}
         {listOk && (
-            <>
-            <Table striped bordered hover className="board-table">
-                <thead>
-                <tr>
-                    <th>번호</th>
-                    <th>제목</th>
-                    <th>문의글</th>
-                    <th>조회수</th>
-                    <th>문의하기</th>
-                </tr>
-                </thead>
-                <tbody>
-                {boardList
-                    .slice()
-                    .reverse()
-                    .map((board) => (
-                    <tr key={board.no}>
-                        <td>{board.no}</td>
-                        <td
-                        className="clickable"
+        <>
+            <div className="board-list">
+            {boardList
+                .slice()
+                .reverse()
+                .map((board) => (
+                <div key={board.no} className="board-item">
+                    <div
+                    className="board-item-title"
+                    onClick={() => boardRead(board.no)}
+                    >
+                    {board.title}
+                    </div>
+                    <div
+                    className="board-item-desc"
+                    onClick={() => boardRead(board.no)}
+                    >
+                    {board.description}
+                    </div>
+                    <div className="board-item-meta">
+                    <span>No. {board.no} · 조회 {board.viewCount}회</span>
+                    <div className="board-item-buttons">
+                        <Button
+                        variant="outline-primary"
+                        size="sm"
                         onClick={() => boardRead(board.no)}
                         >
-                        {board.title}
-                        </td>
-                        <td
-                        className="clickable"
-                        onClick={() => boardRead(board.no)}
-                        >
-                        {board.description}
-                        </td>
-                        <td>{board.viewCount}</td>
-                        <td>
-                        <Button
-                            variant="outline-primary"
-                            size="sm"
-                            onClick={() => boardRead(board.no)}
-                        >
-                            게시글읽기
+                        읽기
                         </Button>
                         <Button
-                            variant="outline-success"
-                            size="sm"
-                            onClick={() => boardEdit(board.no)}
-                            style={{ marginLeft: "6px" }}
+                        variant="outline-success"
+                        size="sm"
+                        onClick={() => boardEdit(board.no)}
                         >
-                            수정
+                        수정
                         </Button>
                         <Button
-                            variant="outline-danger"
-                            size="sm"
-                            onClick={() => boardDelete(board.no)}
-                            style={{ marginLeft: "6px" }}
+                        variant="outline-danger"
+                        size="sm"
+                        onClick={() => boardDelete(board.no)}
                         >
-                            삭제
+                        삭제
                         </Button>
-                        </td>
-                    </tr>
-                    ))}
-                </tbody>
-            </Table>
+                    </div>
+                    </div>
+                </div>
+                ))}
+            </div>
 
             <div className="board-list-actions">
-                <Button variant="primary" onClick={boardWrite}>
+            <Button variant="primary" onClick={boardWrite}>
                 문의글 작성하기
-                </Button>
+            </Button>
             </div>
-            </>
+        </>
         )}
 
         {/* 읽기 화면 */}
         {readOk && (
-            <div>
+        <div>
             <h5 className="board-read-title">{boardInfo.title}</h5>
             <hr />
             <p className="board-read-body">{boardInfo.description}</p>
             <div className="board-form-actions">
-                <Button variant="secondary" onClick={boardListView}>
+            <Button variant="secondary" onClick={boardListView}>
                 목록으로
-                </Button>
+            </Button>
             </div>
-            </div>
+        </div>
         )}
-
         {/* 새 글 작성 폼 */}
         {writeOk && (
             <div>
