@@ -1,7 +1,7 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
 
-function Detail({ fruit, veggie }) {
+function Detail({ fruit, veggie, onAddToCart }) {
 
     const { type, id } = useParams();         // URL에서 /detail/:id 의 id 가져오기
     const numericId = Number(id);       // URL 파라미터는 문자열이므로 문자열 → 숫자로 캐스팅
@@ -17,6 +17,10 @@ function Detail({ fruit, veggie }) {
     }
 
     const { imgUrl, title, content, price, weight } = item;
+
+    const handleAddToCart = () => {
+        onAddToCart(item);
+    };
 
     return (
         <div className="container">
@@ -39,7 +43,9 @@ function Detail({ fruit, veggie }) {
                     <p>{content}</p>
                     {weight && <p>{weight}</p>}
                     <p>{price.toLocaleString()}원</p>
-                    <button className="btn btn-danger">주문하기</button>
+                    {/* <button className="btn btn-danger">주문하기</button> */}
+                    <button className="btn btn-danger" onClick={handleAddToCart}>
+                        장바구니 담기</button>
                 </div>
             </div>
         </div>

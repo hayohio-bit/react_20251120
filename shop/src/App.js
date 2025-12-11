@@ -15,11 +15,13 @@ import Title from './components/Title';
 import Title2 from './components/Title2';
 import ComVeggie from './components/ComVeggie';
 import veggieData from './db/veggie';
+import Cart from './components/Cart';
 
 function App() {
 
   const [fruit, setFruit] = useState(data);
   const [veggie, setVeggie] = useState(veggieData);
+  const [cart, setCart] = useState([]);
   const navigate = useNavigate();
 
   const sortByName = () => {
@@ -116,7 +118,15 @@ function App() {
                 </div> } />
 
           {/* 상세 페이지 */}
-          <Route path="/detail/:type/:id" element={<Detail fruit={fruit} veggie={veggie} />} />
+          <Route path="/detail/:type/:id" 
+          element={
+            <Detail 
+            fruit={fruit} 
+            veggie={veggie} 
+            onAddToCart={(item) => setCart([...cart, item])}
+            />} 
+          />
+          <Route path="/cart" element={<Cart cart={cart} />} />
 
           {/* 회사소개 + 중첩 라우트 */}
           <Route path="/about" element={<About/>} >
