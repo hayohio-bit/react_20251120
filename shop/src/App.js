@@ -2,7 +2,6 @@ import './App.css';
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import {Button, Nav} from 'react-bootstrap'
-import data from './db/fruit';
 import { useState } from 'react';
 import Products from './components/Products';
 import { Route, Routes, useNavigate } from "react-router-dom";
@@ -16,13 +15,69 @@ import Title2 from './components/Title2';
 import ComVeggie from './components/ComVeggie';
 import veggieData from './db/veggie';
 import Cart from './components/Cart';
+import { useEffect } from 'react';
+import axios from 'axios';
+//import data from './db/fruit';
 
 function App() {
 
-  const [fruit, setFruit] = useState(data);
+  const [fruit, setFruit] = useState([]);
   const [veggie, setVeggie] = useState(veggieData);
   const [cart, setCart] = useState([]);
+  const [loading,setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [veggieCount, setVeggieCount] = useState(1);
   const navigate = useNavigate();
+
+  // useEffect로 마운트 시 과일데이터 fetch
+  useEffect(() => {
+    const fetchFruit = async () => {
+      try {
+        setLoading(true);
+        const response = await axios.get('https://jsonplaceholder.typicode.com/posts?_limit=6');
+
+    const fruitData = response.data.map((item) => ({
+      id: item.id,
+      title: `과일 ${item.id}`,
+      imgUrl: `img/fruit${item.id}.jpg`,
+      content: item.body.substring(0,30) + '...',
+      price: 5000 + (item.id * 1000),
+      weight: '1kg',
+    }));
+
+    setFruit(fruitData);
+    setError(null);
+    } catch (err) {
+    console.error('데이터 로드 실패:', err);
+    setError('과일 데이터를 불러올 수 없습니다.');
+    setFruit([]);
+    } finally {
+    setLoading(false);
+  }
+};
+
+fetchFruit();
+}, []);
+
+
+const handleLoadMoreVeggie = async() => {
+  try {
+    if(veggieCount === 1) {
+      const result = await axios.get('https://sinaboro.github.io/react_data/veggie2.json');
+      setVeggie([...veggie, ...result.data]);
+      setVeggieCount(2);
+    } else if (veggieCount === 2) {
+      const result = await axios.get('https://sinaboro.github.io/react_data/veggie3.json');
+      setVeggie([...veggie, ...result.data]);
+      setVeggieCount(3);
+    } else if (veggieCount === 3 ) {
+      alert('더이상 상품이 없습니다.');
+    }
+  } catch (err) {
+    console.error('데이터 로드 실패:', err);
+    alert('데이터를 불러올 수 없습니다.');
+  }
+};
 
   const sortByName = () => {
     const sortedFruit = [...fruit].sort((a, b) =>
@@ -40,6 +95,8 @@ function App() {
     setFruit(sortedFruit);
   };
 
+
+
   return (
     <div className="App">
       <Navbar bg="dark" variant="dark">
@@ -49,8 +106,7 @@ function App() {
           </Navbar.Brand>
           <Nav className="me-auto">
             <Nav.Link onClick={()=>{navigate('/')}}>홈으로</Nav.Link>
-            {/* 상세는 특정 id 필요하므로 데모용으로 1번 상품 연결 */}
-            <Nav.Link onClick={()=>{navigate('/detail/furit/1')}}>상세페이지</Nav.Link>
+            <Nav.Link onClick={()=>{navigate('/detail/fruit/1')}}>상세페이지</Nav.Link>
             <Nav.Link onClick={()=>{navigate('/cart')}}>장바구니</Nav.Link>
             <Nav.Link onClick={()=>{navigate('/about')}}>회사소개</Nav.Link>
           </Nav>
@@ -94,11 +150,17 @@ function App() {
                           높은가격순 정렬
                         </Button>
                       </div>
-                    
+
+                      {/* 로딩 상태 */}
+                      {loading && <p style={{ textAlign: 'center', width: '100%' }}>과일 데이터 로딩 중...</p>}
+                      
+                      {/* 에러 상태 */}
+                      {error && <p style={{ textAlign: 'center', width: '100%', color: 'red' }}>{error}</p>}
+
                       {/* 상품 카드 리스트 */}
-                      {fruit.map((item) => ( 
-                        <Products {...item} key={item.id} />            
-                        ))}
+                      {!loading && fruit.map((item) => (
+                        <Products {...item} key={item.id} />
+                      ))}
 
                       {/* 채소 섹션 */}
                       <div className='container' style={{ marginTop:'70px'}}>
@@ -110,7 +172,12 @@ function App() {
                         </div>
 
                         <div style={{textAlign:'center', marginTop: '20px'}}>
-                        <Button variant="outline-success"> + 3개 상품 더 보기 </Button>
+                        <Button 
+                        variant="outline-success" 
+                        onClick={handleLoadMoreVeggie}
+                        >
+                          + 3개 상품 더 보기 
+                          </Button>
                         </div>
                       </div>
                     </div>
@@ -126,6 +193,8 @@ function App() {
             onAddToCart={(item) => setCart([...cart, item])}
             />} 
           />
+
+          {/* 장바구니 */}
           <Route path="/cart" element={<Cart cart={cart} />} />
 
           {/* 회사소개 + 중첩 라우트 */}
