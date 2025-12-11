@@ -36,3 +36,127 @@
     transform: rotate(360deg);
   }
 }
+
+.sort-buttons {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.sort-buttons .btn {
+  min-width: 140px;
+}
+
+
+/* 게시판 전체 래퍼 */
+.board-wrap {
+  margin-top: 80px;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* 상단 제목 영역 */
+.board-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 20px;
+}
+
+.board-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.board-subtitle {
+  font-size: 0.9rem;
+  color: #6c757d;
+}
+
+/* 목록 테이블 */
+.board-table {
+  margin-top: 10px;
+  font-size: 0.95rem;
+  background-color: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.board-table thead th {
+  text-align: center;
+  background-color: #f1f3f5;
+  border-bottom: 2px solid #dee2e6;
+}
+
+.board-table tbody td {
+  vertical-align: middle;
+}
+
+/* 제목/내용 클릭 영역 */
+.board-table td.clickable {
+  cursor: pointer;
+  text-align: left;
+}
+
+.board-table td.clickable:hover {
+  color: #0d6efd;
+  text-decoration: underline;
+}
+
+/* 번호, 조회수 정렬 */
+.board-table td:first-child,
+.board-table td:nth-child(4),
+.board-table th:first-child,
+.board-table th:nth-child(4) {
+  text-align: center;
+  width: 80px;
+}
+
+/* 마지막 열 버튼들 */
+.board-table td:last-child {
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* 목록 하단 버튼 영역 */
+.board-list-actions {
+  margin-top: 15px;
+  text-align: right;
+}
+/* 읽기 화면 */
+.board-read-title {
+  text-align: left;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.board-read-body {
+  text-align: left;
+  line-height: 1.6;
+  background-color: #fff;
+  padding: 16px 18px;
+  border-radius: 8px;
+  border: 1px solid #e9ecef;
+  white-space: pre-line;
+  min-height: 120px;
+}
+
+.board-form-actions {
+  margin-top: 15px;
+  text-align: right;
+}
+
+/* 폼 공통 */
+.board-form-title,
+.board-edit-title {
+  margin-top: 30px;
+  margin-bottom: 15px;
+  text-align: left;
+  font-weight: 600;
+}
+
+.board-form-group {
+  margin-bottom: 15px;
+}

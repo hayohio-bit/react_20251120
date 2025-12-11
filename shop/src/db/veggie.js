@@ -23,6 +23,6 @@ const veggie = [
         content: '강원도 두백산 수미 감자',
         price: 30000,
     },
-];
+    ];
 
 export default veggie;

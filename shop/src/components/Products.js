@@ -1,36 +1,27 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
-const Products = ( { id, title, price, imgUrl, content, weight } ) => {
+function Products(props) {
     const navigate = useNavigate();
-
-    const handleClick = () => {
-        navigate(`/detail/fruit/${id}`);
-    };
+    const { id, title, price, imgUrl, content } = props;
 
     return (
-        <div className='col-md-4' style={{marginBottom:"50px"}}>
-            <div
-            className='card'
-            onClick={handleClick}
-            role="button"
-            tabIndex={0}
-            onKeyDown={(e) => e.key === 'Enter' && handleClick()}
-            style={{ cursor: 'pointer' }}
-            >
+        <div className="col-md-4" style={{ marginBottom: "50px" }}>
+        <div
+            className="c1"
+            onClick={() => navigate(`/detail/fruit/${id}`)}
+            style={{ cursor: "pointer", textAlign: "center" }}
+        >
             <img
-            src={'/' + imgUrl}
-            className="card-img-top"
+            src={process.env.PUBLIC_URL+"/"+imgUrl}
+            style={{ width: "100%", maxWidth: "250px", height: "auto" }}
             alt={title}
-            style={{ height: '250px', objectFit: 'cover' }}
             />
-            <h5 style={{ marginTop: '10px' }}>{title}</h5>
+            <h5 style={{ marginTop: "10px" }}>{title}</h5>
             <p>{content}</p>
-            {weight && <p>{weight}</p>}
-            <p>{price.toLocaleString()}원</p>
-            </div>
+        <span>{price.toLocaleString()}원</span>
+        </div>
         </div>
     );
-};
+}
 
 export default Products;

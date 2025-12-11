@@ -14,7 +14,7 @@ import React from 'react';
 
     return (
         <div style={wrapperStyle}>
-        <h3>채소 TOP 3</h3>
+        <h3>채소.야채 TOP</h3>
         <p style={subTextStyle}>신선한 제철 채소를 만나보세요.</p>
         </div>
     );
