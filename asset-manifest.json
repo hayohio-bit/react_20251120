@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/react_20251120/static/css/main.80382796.css",
+    "main.js": "/react_20251120/static/js/main.df413342.js",
+    "index.html": "/react_20251120/index.html",
+    "main.80382796.css.map": "/react_20251120/static/css/main.80382796.css.map",
+    "main.df413342.js.map": "/react_20251120/static/js/main.df413342.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.80382796.css",
+    "static/js/main.df413342.js"
+  ]
+}
