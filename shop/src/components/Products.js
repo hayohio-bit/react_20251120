@@ -5,28 +5,29 @@ const Products = ( { id, title, price, imgUrl, content, weight } ) => {
     const navigate = useNavigate();
 
     const handleClick = () => {
-        navigate(`/detail/${id}`);
+        navigate(`/detail/fruit/${id}`);
     };
 
     return (
         <div className='col-md-4' style={{marginBottom:"50px"}}>
             <div
-            className='c1'
+            className='card'
             onClick={handleClick}
             role="button"
             tabIndex={0}
             onKeyDown={(e) => e.key === 'Enter' && handleClick()}
+            style={{ cursor: 'pointer' }}
             >
-            
-            <img 
-            src={process.env.PUBLIC_URL+'/'+imgUrl} 
-            width="80%" 
-            alt={title} 
+            <img
+            src={'/' + imgUrl}
+            className="card-img-top"
+            alt={title}
+            style={{ height: '250px', objectFit: 'cover' }}
             />
-            <h5 style={{ marginTop:"10px" }}>{title}</h5>
+            <h5 style={{ marginTop: '10px' }}>{title}</h5>
             <p>{content}</p>
-            <p>{weight}</p>
-            <span>{price.toLocaleString()}원</span>
+            {weight && <p>{weight}</p>}
+            <p>{price.toLocaleString()}원</p>
             </div>
         </div>
     );

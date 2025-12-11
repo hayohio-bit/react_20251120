@@ -12,10 +12,14 @@ import About from './components/About';
 import Location from './components/Location';
 import Member from './components/Member';
 import Title from './components/Title';
+import Title2 from './components/Title2';
+import ComVeggie from './components/ComVeggie';
+import veggieData from './db/veggie';
 
 function App() {
 
   const [fruit, setFruit] = useState(data);
+  const [veggie, setVeggie] = useState(veggieData);
   const navigate = useNavigate();
 
   const sortByName = () => {
@@ -44,7 +48,7 @@ function App() {
           <Nav className="me-auto">
             <Nav.Link onClick={()=>{navigate('/')}}>홈으로</Nav.Link>
             {/* 상세는 특정 id 필요하므로 데모용으로 1번 상품 연결 */}
-            <Nav.Link onClick={()=>{navigate('/detail/1')}}>상세페이지</Nav.Link>
+            <Nav.Link onClick={()=>{navigate('/detail/furit/1')}}>상세페이지</Nav.Link>
             <Nav.Link onClick={()=>{navigate('/cart')}}>장바구니</Nav.Link>
             <Nav.Link onClick={()=>{navigate('/about')}}>회사소개</Nav.Link>
           </Nav>
@@ -93,12 +97,26 @@ function App() {
                       {fruit.map((item) => ( 
                         <Products {...item} key={item.id} />            
                         ))}
+
+                      {/* 채소 섹션 */}
+                      <div className='container' style={{ marginTop:'70px'}}>
+                        <Title2 />
+                        <div className='row' style={{ marginTop:'20px'}}>
+                          {veggie.map((item) => (
+                          <ComVeggie {...item} key={item.id} />
+                          ))}
+                        </div>
+
+                        <div style={{textAlign:'center', marginTop: '20px'}}>
+                        <Button variant="outline-success"> + 3개 상품 더 보기 </Button>
+                        </div>
+                      </div>
                     </div>
                   </div>
-              </div> } />
+                </div> } />
 
           {/* 상세 페이지 */}
-          <Route path="/detail/:id" element={<Detail fruit={fruit}/>} />
+          <Route path="/detail/:type/:id" element={<Detail fruit={fruit} veggie={veggie} />} />
 
           {/* 회사소개 + 중첩 라우트 */}
           <Route path="/about" element={<About/>} >
