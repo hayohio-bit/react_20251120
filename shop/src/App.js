@@ -121,12 +121,8 @@ function App() {
               {/* 슬라이더 */}
               <div
                 className="slider"
-                style={{
-                  backgroundImage: `url(${
-                    process.env.PUBLIC_URL + "/img/slider.jpg"
-                  })`,
-                }}
-              ></div>
+                style={{ backgroundImage:
+`url(${process.env.PUBLIC_URL + '/img/slider.jpg'})`, }}></div>
 
               <Title />
 
